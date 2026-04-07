@@ -1,22 +1,21 @@
-import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
 export const metadata = {
-  title: "Amrit Gill | Economist & Data Storyteller",
+  title: "Amrit Gill",
   description:
     "Portfolio of Amrit Gill - economist, data analyst, and researcher",
 };
@@ -24,10 +23,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${spaceGrotesk.variable}`}>
-        <Nav />
+      <body className={`${inter.variable} ${outfit.variable}`}>
         {children}
-        <Footer />
       </body>
     </html>
   );

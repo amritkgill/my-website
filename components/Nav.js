@@ -16,18 +16,14 @@ export default function Nav() {
   const handleLinkClick = () => setMenuOpen(false);
 
   const links = [
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#projects" },
     { label: "Experience", href: "#experience" },
-    { label: "Life", href: "#hobbies" },
-    { label: "Contact", href: "#contact" },
   ];
 
   return (
     <>
       <nav className={`nav${scrolled ? " scrolled" : ""}`} id="nav">
-        <a href="#" className="nav-logo">AG</a>
+        <a href="#" className="nav-logo">Amrit</a>
         <div className="nav-links">
           {links.map(({ label, href }) => (
             <a key={label} href={href} onClick={handleLinkClick}>{label}</a>

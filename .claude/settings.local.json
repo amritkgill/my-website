@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -fsSL https://nodejs.org/dist/v22.15.0/node-v22.15.0-darwin-arm64.tar.gz -o /tmp/node.tar.gz)",
+      "Bash(tar -xzf /tmp/node.tar.gz -C /tmp/)",
+      "Read(//tmp/node-v22.15.0-darwin-arm64/**)"
+    ]
+  }
+}
