@@ -1,0 +1,60 @@
+---
+title: "Tariffs & Corporate Profit Shifting"
+type: "Capstone Research"
+date: "May 2026"
+description: "Analyzing the impact of Section 301 tariffs on corporate profit shifting behavior using panel data econometric methods including difference-in-differences and event study designs."
+tools:
+  - Python
+  - Panel Data
+  - Diff-in-Diff
+  - Event Study
+  - Bloomberg
+  - USITC Data
+---
+
+## Overview
+
+This capstone research project investigates how Section 301 tariffs imposed on Chinese imports have influenced corporate profit shifting strategies among publicly traded U.S. multinational firms. By combining high-frequency financial data with detailed trade flow records, the study identifies whether firms with greater tariff exposure systematically reallocated reported profits across jurisdictions following major tariff announcements.
+
+## Methodology
+
+The core empirical strategy employs a difference-in-differences framework comparing firms with high tariff exposure against a matched control group of firms with minimal direct exposure to Section 301 duties. Treatment intensity is measured using firm-level import shares from affected Harmonized Tariff Schedule (HTS) categories.
+
+An event study design complements the DiD analysis by tracing the dynamic response of profit shifting indicators around key tariff announcement dates. This allows for visual inspection of pre-trends and the timing of behavioral changes relative to policy shocks.
+
+## Data Sources
+
+The analysis draws on Bloomberg terminal data for quarterly firm-level financials, including effective tax rates, foreign income shares, and related-party transaction volumes across a multi-year panel.
+
+USITC trade data provides product-level import values and tariff rates at the HTS-10 level, enabling precise measurement of firm-specific tariff exposure based on disclosed supply chain information.
+
+### Sample Code
+
+```python
+import pandas as pd
+
+# Merge firm financials with tariff exposure
+firm_data = pd.read_csv("firm_financials.csv")
+tariff_exposure = pd.read_csv("tariff_exposure.csv")
+
+merged = firm_data.merge(
+    tariff_exposure,
+    on=["firm_id", "quarter"],
+    how="left"
+)
+
+# Flag treatment group based on exposure threshold
+merged["treated"] = (merged["tariff_share"] > 0.25).astype(int)
+
+# Create post-treatment indicator
+merged["post"] = (merged["quarter"] >= "2018Q3").astype(int)
+
+# DiD interaction term
+merged["did"] = merged["treated"] * merged["post"]
+
+print(merged[["firm_id", "quarter", "treated", "post", "did"]].head(10))
+```
+
+## Key Findings
+
+This research is still in progress. Preliminary results suggest differential responses among firms with high tariff exposure, but final estimates and robustness checks are forthcoming as the analysis is refined.

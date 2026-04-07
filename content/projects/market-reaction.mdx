@@ -1,0 +1,45 @@
+---
+title: "Analyzing Market Reaction to Economic Announcements"
+type: "Econometric Analysis"
+date: "May 2025"
+description: "Estimating the causal impact of major economic announcements on equity market returns using OLS regression with robust standard errors and VIX-based interaction terms."
+tools:
+  - Python
+  - OLS Regression
+  - statsmodels
+  - VIX Analysis
+  - Robust SE
+  - Time Series
+---
+
+## Overview
+
+This project measures how equity markets respond to scheduled economic announcements from the Federal Reserve, Bureau of Labor Statistics, and Bureau of Economic Analysis. Using daily return data and a comprehensive calendar of announcement dates, the analysis isolates the incremental effect of each announcement type on aggregate market returns while controlling for prevailing volatility conditions.
+
+## Methodology
+
+The primary specification is an OLS regression of daily S&P 500 returns on announcement indicator variables, with heteroskedasticity-robust (HC1) standard errors to account for time-varying volatility in financial returns. The baseline model includes indicators for FOMC decisions, nonfarm payroll releases, GDP prints, and CPI reports.
+
+VIX interaction terms extend the model by allowing announcement effects to vary with the level of market uncertainty. This captures the empirical regularity that markets react more sharply to news during high-volatility regimes. The VIX level on the trading day prior to each announcement serves as the conditioning variable.
+
+## Key Findings
+
+Federal Reserve announcements are associated with a statistically significant 0.19% increase in daily returns on announcement days, with a p-value below 0.01. This effect is amplified during periods of elevated VIX readings, consistent with the information-resolution hypothesis. Employment reports show a smaller but still significant positive effect, while GDP and CPI releases produce more mixed results depending on the sample period and volatility regime.
+
+```python
+import statsmodels.api as sm
+import pandas as pd
+
+# Load market return data with announcement indicators
+df = pd.read_csv("market_announcements.csv", parse_dates=["date"])
+
+# Define regressors
+X = df[["fed_announcement", "nfp_announcement", "gdp_announcement",
+        "cpi_announcement", "vix_lag", "fed_x_vix"]]
+X = sm.add_constant(X)
+y = df["sp500_return"]
+
+# OLS with robust standard errors
+model = sm.OLS(y, X).fit(cov_type="HC1")
+print(model.summary())
+```
