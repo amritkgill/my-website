@@ -1,4 +1,4 @@
-export default function BlogPage() {
+export default function HikingPage() {
   return (
     <main>
       <section className="page-section">

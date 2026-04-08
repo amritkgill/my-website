@@ -1,17 +1,11 @@
-import { Inter, Outfit } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import Nav from "@/components/Nav";
 
-
-const inter = Inter({
-  variable: "--font-inter",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-main",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -23,7 +17,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable}`}>
+      <body className={cormorant.variable}>
+        <Nav />
         {children}
       </body>
     </html>
