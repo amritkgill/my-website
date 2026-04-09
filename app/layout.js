@@ -12,6 +12,10 @@ export const metadata = {
   title: "Amrit Gill",
   description:
     "Portfolio of Amrit Gill - economist, data analyst, and researcher",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
