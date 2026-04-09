@@ -46,8 +46,8 @@ export default function Nav() {
 
   const links = [
     { label: "Projects", href: "/projects" },
-    { label: "Hiking", href: "/hiking" },
     { label: "Blog", href: "/blog" },
+    { label: "Hiking", href: "/hiking" },
   ];
 
   const projectLinks = [

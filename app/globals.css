@@ -275,11 +275,11 @@ main { margin-left: 0; }
 
 /* ===== Projects Page Layout ===== */
 .projects-page {
-  max-width: 760px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 80px 32px 48px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   box-sizing: border-box;
 }
@@ -627,6 +627,7 @@ main { margin-left: 0; }
   }
   .hiking-gallery { columns: 2; }
   .hiking-page { padding: 70px 16px 32px; }
+  .blog-page { grid-template-columns: 1fr 1fr; padding: 70px 16px 32px; }
   .chart-section { padding: 40px 0 60px !important; }
   .carousel-row { padding: 0 12px; gap: 8px; }
 }
@@ -642,21 +643,19 @@ main { margin-left: 0; }
   .carousel-btn { width: 32px; height: 32px; }
   .page-section { padding: 48px 20px 40px; }
   .projects-page { padding: 16px 10px; gap: 10px; }
-  .blog-page { padding: 16px; }
+  .blog-page { padding: 16px; grid-template-columns: 1fr; }
   .hiking-gallery { columns: 1; }
   .hiking-page { padding: 64px 12px 24px; }
 }
 
 /* ===== Blog Page ===== */
 .blog-page {
-  max-width: 760px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 80px 32px 48px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
-  min-height: calc(100dvh - 56px);
-  justify-content: center;
 }
 
 .blog-card {
