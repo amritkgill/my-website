@@ -20,7 +20,7 @@ const projects = [
     title: "Compulsory Voting & Voter Turnout",
     subtitle: "Causal Inference",
     description:
-      "Global panel DiD estimating compulsory voting increases turnout by ~10 percentage points.",
+      "Global panel DiD estimating compulsory voting increases turnout by about 10%, using data from 202 countries.",
   },
   {
     id: "market-reaction",
