@@ -10,7 +10,7 @@ export default function Hero() {
         </div>
         <div className="hero-bio-col">
           <p className="hero-bio">
-            Hi! I'm Amrit. I use data and economics to find patterns in how the world works. This is where I put my projects and thoughts. Outside of this, I'm usually out hiking.
+            Hi! I'm Amrit. I use data and economics to find patterns in how the world works. This is my portfolio where I put my projects and thoughts. Outside of this, I'm usually out hiking.
           </p>
         </div>
       </div>
