@@ -655,8 +655,9 @@ main { margin-left: 0; }
   margin: 0 auto;
   padding: 80px 32px 48px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  overflow-x: hidden;
 }
 
 .blog-card {
@@ -668,6 +669,8 @@ main { margin-left: 0; }
   text-decoration: none;
   transition: box-shadow 0.2s;
   min-height: 240px;
+  min-width: 0;
+  overflow: hidden;
 }
 .blog-card:hover {
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
