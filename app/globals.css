@@ -622,12 +622,13 @@ main { margin-left: 0; }
 
   .projects-section, .page-section { padding: 60px 24px; }
   .projects-page {
-    padding: 24px 16px;
+    padding: 70px 16px 32px;
     gap: 12px;
+    grid-template-columns: 1fr;
   }
   .hiking-gallery { columns: 2; }
   .hiking-page { padding: 70px 16px 32px; }
-  .blog-page { grid-template-columns: 1fr 1fr; padding: 70px 16px 32px; }
+  .blog-page { grid-template-columns: 1fr; padding: 70px 16px 32px; }
   .chart-section { padding: 40px 0 60px !important; }
   .carousel-row { padding: 0 12px; gap: 8px; }
 }
@@ -642,7 +643,7 @@ main { margin-left: 0; }
   .carousel-row { padding: 0 8px; gap: 6px; }
   .carousel-btn { width: 32px; height: 32px; }
   .page-section { padding: 48px 20px 40px; }
-  .projects-page { padding: 16px 10px; gap: 10px; }
+  .projects-page { padding: 64px 10px 24px; gap: 10px; grid-template-columns: 1fr; }
   .blog-page { padding: 16px; grid-template-columns: 1fr; }
   .hiking-gallery { columns: 1; }
   .hiking-page { padding: 64px 12px 24px; }
