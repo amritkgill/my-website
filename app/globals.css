@@ -447,7 +447,8 @@ main { margin-left: 0; }
   .mobile-nav { display: flex; }
   main { padding-top: 56px; }
 
-  .hero { padding: 100px 24px 60px; }
+  .hero { padding: 100px 24px 60px; min-height: auto; }
+  .hero-arrow { display: none; }
   .hero-layout {
     grid-template-columns: 1fr;
     gap: 32px;

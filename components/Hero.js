@@ -10,11 +10,11 @@ export default function Hero() {
         </div>
         <div className="hero-bio-col">
           <p className="hero-bio">
-            Hi, I'm Amrit. I use data and economics to find patterns in how the world works. This is where I dump my projects and thoughts. Outside of this, I'm usually out hiking.
+            Hi, I'm Amrit. I use data and economics to find patterns in how the world works. This is where I put my projects and thoughts. Outside of this, I'm usually out hiking.
           </p>
         </div>
       </div>
-      <div style={{ marginTop: "auto", textAlign: "center", paddingBottom: "32px" }}>
+      <div className="hero-arrow" style={{ marginTop: "auto", textAlign: "center", paddingBottom: "32px" }}>
         <a href="#chart-section" style={{ display: "inline-block", animation: "bounce 1.8s ease-in-out infinite" }}>
           <svg width="36" height="20" viewBox="0 0 36 20" fill="none">
             <polyline
