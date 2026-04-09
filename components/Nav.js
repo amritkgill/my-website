@@ -50,13 +50,35 @@ export default function Nav() {
     { label: "Blog", href: "/blog" },
   ];
 
+  const projectLinks = [
+    { label: "Tariffs & Profit Shifting", href: "/projects/tariffs" },
+    { label: "Deforestation & Child Health", href: "/projects/deforestation" },
+    { label: "Compulsory Voting", href: "/projects/compulsory-voting" },
+    { label: "Analyzing Market Reaction", href: "/projects/market-reaction" },
+    { label: "Housing Prices", href: "/projects/housing-prices" },
+    { label: "Solar Energy", href: "/projects/solar-energy" },
+  ];
+
   return (
     <>
       <nav className="sidebar" id="nav">
         <a href="/" className="sidebar-logo">AG</a>
         <div className="sidebar-links">
           {links.map(({ label, href }) => (
-            <a key={label} href={href}>{label}</a>
+            label === "Projects" ? (
+              <div key={label} className="nav-dropdown">
+                <a href={href}>{label}</a>
+                <div className="nav-dropdown-menu">
+                  <div className="nav-dropdown-menu-inner">
+                    {projectLinks.map((p) => (
+                      <a key={p.href} href={p.href}>{p.label}</a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a key={label} href={href}>{label}</a>
+            )
           ))}
         </div>
         <div className="sidebar-socials">

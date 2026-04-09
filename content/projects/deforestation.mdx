@@ -1,0 +1,41 @@
+---
+title: "Deforestation & Child Health in Tropical Countries"
+type: "Research Proposal"
+date: "Apr 2026"
+description: "Proposing an instrumental variables strategy to estimate the causal effect of deforestation on child health outcomes across tropical developing countries, using drought-induced fire variation as an instrument."
+tools:
+  - Instrumental Variables
+  - Panel Data
+  - Hansen Forest Change Data
+  - NASA FIRMS
+  - DHS Surveys
+  - Python
+---
+
+## Overview
+
+This is an in-progress research proposal investigating whether deforestation causes worse health outcomes for young children in tropical developing countries. The core challenge is that deforestation is endogenous: it clusters in poor areas with bad governance, making it hard to separate the effect of tree loss from underlying poverty. This proposal outlines an instrumental variables strategy to address that identification problem.
+
+## Motivation
+
+During the fire season across Brazil's Legal Amazon from 2009 to 2019, more than a third of all respiratory disease hospitalizations were among children under 14. Deforestation is a textbook externality: people clearing trees capture private gains while surrounding communities bear health costs from smoke and changed local climate. Forest products make up an average of 21% of household income in communities living near forests, with the poorest households most dependent.
+
+Existing studies have linked deforestation to hospitalizations in Brazil, malaria in Indonesia, diarrhea in multiple countries, reduced diet diversity in Sub-Saharan Africa, and child stunting in Cambodia. But these studies mostly examine one country or one health channel at a time, and none use causal identification across multiple countries and outcomes simultaneously.
+
+## Research Question
+
+Does deforestation cause worse health outcomes for young children in tropical developing countries?
+
+## Identification Strategy
+
+The proposed instrument exploits the fact that unusually dry years cause more burning during land clearing. Whether a given year is dry is effectively random with respect to child health, but it strongly predicts how much fire and smoke communities near deforestation experience. This provides an exogenous source of variation in pollution exposure tied to deforestation activity.
+
+### Data Sources
+
+- **Hansen Global Forest Change Dataset**: satellite-derived tree cover loss at high resolution globally
+- **NASA FIRMS**: active fire data for measuring smoke exposure
+- **DHS Surveys**: child health outcomes (respiratory illness, stunting, diarrhea) across tropical developing countries
+
+## Current Status
+
+This project is in the early proposal stage. The identification strategy, literature review, and data source plan are established. Data assembly and estimation are forthcoming.

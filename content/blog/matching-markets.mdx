@@ -1,0 +1,49 @@
+---
+title: "How Matching Theory Shapes Real-World Policy"
+date: "2025-04-01"
+description: "A summary of how foundational matching models: from Gale-Shapley to Top Trading Cycles: have been adapted to design real-world mechanisms for housing, school choice, and kidney exchange."
+---
+
+## The Problem
+
+How do you assign people to things: dorm rooms, schools, kidneys: when everyone has different preferences and some people have existing rights? You can't use prices (you don't auction off kidneys), and you can't just let people grab what they want (chaos). This is the matching problem.
+
+It turns out that seemingly unrelated systems: university housing, public school enrollment, organ donation: can all be understood through the same small set of matching models. A paper by Abdulkadiroglu and Sonmez lays out this framework, and I presented a summary of it for a microeconomics course. Here's the core idea.
+
+## Two Foundational Models
+
+**Two-Sided Matching (Gale-Shapley):** Both sides have preferences. Hospitals rank residents, residents rank hospitals. The Deferred Acceptance algorithm produces stable outcomes: no pair would rather be matched with each other than their current assignment. This is the basis of the National Resident Matching Program.
+
+**One-Sided Matching (Shapley-Scarf):** Only one side has preferences. You have a dorm room, I have a dorm room, houses don't care who lives in them. The Top Trading Cycles (TTC) mechanism lets people trade until no one can do better. It's efficient and strategy-proof: you never benefit from lying about your preferences.
+
+## Where Classical Models Fall Short
+
+Real systems are messier than either model assumes. Schools don't have preferences: they have priority rules (siblings, proximity). Not everyone starts with a house: newcomers need rooms too. Kidney donors don't pick recipients: compatibility is biological. The paper's contribution is showing how to adapt the foundational tools to handle these complications.
+
+## Three Applications
+
+### Housing with Existing Tenants
+
+Some students already have rooms and have the right to stay. New students need rooms. A modified TTC mechanism handles this hybrid: existing tenants point to their top choice, occupied houses point back to their tenant, and when trading cycles form, those swaps happen. It's individually rational (no one is forced to downgrade), efficient, and strategy-proof.
+
+### School Choice
+
+Students have preferences over schools, but schools have priority orderings, not preferences. Old systems in places like Boston and NYC punished honest families: listing your true first choice could land you at your worst option. The fix: apply Deferred Acceptance (strategy-proof, respects priorities) or TTC (efficient, strategy-proof). Neither can satisfy all desirable properties at once, but both are strictly better than the systems they replaced. NYC and Boston adopted these mechanism-design solutions.
+
+### Kidney Exchange
+
+When a donor-patient pair is biologically incompatible, that donor might match a different patient whose donor matches someone else. These form trading cycles, just like housing. Altruistic donors (no patient attached) can start long chains. The Top Trading Cycles and Chains (TTCC) mechanism organizes these exchanges, and its incentive properties ensure hospitals don't benefit from hiding pairs: which means more transplants get done.
+
+## The Key Tradeoffs
+
+Every application hits the same fundamental tensions:
+
+- **Stability vs. strategy-proofness** in two-sided matching
+- **Priority respect vs. efficiency** in school choice
+- **Chain length vs. simplicity** in kidney exchange
+
+No mechanism can have everything. The contribution of this research is making those tradeoffs precise so policymakers can choose deliberately rather than stumbling into bad designs.
+
+## Why This Matters
+
+Matching theory started as abstract math (Gale and Shapley, 1962) and now directly shapes how cities assign students to schools, how hospitals match with residents, and how kidney exchanges save lives. It's one of the clearest examples of economic theory translating into institutional design that affects millions of people.

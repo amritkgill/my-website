@@ -22,17 +22,32 @@ export default async function ProjectPage({ params }) {
   return (
     <div className="project-page">
       <div className="project-page-header">
-        <a href="/#projects" className="back-link">
+        <a href="/projects" className="back-link">
           &larr; Back to Projects
         </a>
         <h1>{frontmatter.title}</h1>
         <p className="project-page-meta">
-          {frontmatter.type} &middot; {frontmatter.date}
+          {frontmatter.date}
         </p>
         {frontmatter.tools && (
           <div className="project-page-tools">
             {frontmatter.tools.map((tool) => (
               <span key={tool}>{tool}</span>
+            ))}
+          </div>
+        )}
+        {frontmatter.links && (
+          <div className="project-page-links">
+            {frontmatter.links.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-link-btn"
+              >
+                {link.label}
+              </a>
             ))}
           </div>
         )}

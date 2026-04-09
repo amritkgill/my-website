@@ -20,18 +20,23 @@ export default async function BlogPostPage({ params }) {
   const { frontmatter, content } = getBlogBySlug(slug);
 
   return (
-    <main>
-      <a href="/blog" className="back-link">
-        &larr; Back to Blog
-      </a>
-
-      <h1 className="project-page-header">{frontmatter.title}</h1>
-
-      <p className="project-meta">{frontmatter.date}</p>
-
+    <div className="project-page">
+      <div className="project-page-header">
+        <a href="/blog" className="back-link">
+          &larr; Back to Blog
+        </a>
+        <h1>{frontmatter.title}</h1>
+        <p className="project-page-meta">
+          {new Date(frontmatter.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+      </div>
       <div className="project-page-content">
         <MDXRemote source={content} />
       </div>
-    </main>
+    </div>
   );
 }

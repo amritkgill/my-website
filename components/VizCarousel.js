@@ -58,20 +58,20 @@ function PlaceholderViz({ title, description, tag }) {
 
 const SLIDES = [
   {
-    projectUrl: "/projects#tariffs",
+    projectUrl: "/projects/tariffs",
     title: "Tariffs & Corporate Profit Shifting",
     subtitle: "Each bubble represents a U.S. industry",
     viz: <BubbleScatterChart projectUrl={null} maxWidth={960} />,
   },
   {
-    projectUrl: "/projects#market-reaction",
+    projectUrl: "/projects/market-reaction",
     title: "Market Reaction to Announcements",
     subtitle: "After controlling for market conditions, how much does each announcement type move the S\u0026P 500 overnight?",
     note: "Adjusted for volatility and prior returns.",
     viz: <MarketReactionChart maxWidth={960} />,
   },
   {
-    projectUrl: "/projects#solar-energy",
+    projectUrl: "/projects/solar-energy",
     title: "Predicting Solar Energy",
     subtitle: "The x-axis is the actual energy produced, and the y-axis is what a machine learning model predicted from weather alone. The closer to the dashed line, the better the guess.",
     viz: <SolarPredictionChart maxWidth={960} />,
