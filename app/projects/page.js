@@ -24,7 +24,7 @@ const projects = [
   },
   {
     id: "market-reaction",
-    title: "Analyzing Market Reaction",
+    title: "Analyzing Market Reaction to Economic Announcements",
     subtitle: "Econometrics",
     description:
       "S&P 500 response to macroeconomic announcements. OLS with VIX interaction terms.",
