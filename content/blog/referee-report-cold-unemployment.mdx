@@ -1,41 +1,37 @@
 ---
 title: "Do Cold Temperatures Cause Unemployment?"
 date: "2026-02-23"
-description: "My referee report on an NBER working paper examining how temperature shocks affect unemployment dynamics in the United States."
+description: "Weather shocks and the U.S. labor market"
 ---
 
-## The Paper
+I reviewed *A Cold Stop: Temperature, Unemployment and Joblessness Dynamics* by Graff Zivin, Lepinteur, Neidell, and Nieto Castro (NBER Working Paper No. 34487, November 2025).
 
-*A Cold Stop: Temperature, Unemployment and Joblessness Dynamics* by Joshua S. Graff Zivin, Anthony Lepinteur, Matthew J. Neidell, and Adrian Nieto Castro (NBER Working Paper No. 34487, November 2025).
+The paper looks at how temperature shocks affect unemployment in the United States. The authors build a model of how firms and workers behave (hiring, firing, quitting, job searching) to figure out the different ways temperature could affect unemployment. They link high-frequency weather data to three decades of monthly Current Population Survey data with over 15 million observations. They find that cold temperatures increase unemployment, specifically in weather-exposed industries. Cold increases layoffs but not quits or temporary contract endings, and there are more absences and operational disruptions. The effect is demand-driven, meaning firms reduce hiring during cold weather.
 
-This paper examines the effect of temperature shocks on unemployment dynamics in the United States. The authors build a model of how firms and workers behave (hiring, firing, quitting, and job searching) to figure out the different ways temperature affects unemployment. They use high-frequency weather data linked to three decades of monthly Current Population Survey data that has over 15 million observations to estimate the effect of temperature in the past three months on the probability that someone is unemployed.
+I think this paper is clearly written and makes a meaningful contribution to climate and economics research. The research question is timely given current job market conditions, and the finding about cold affecting unemployment is new.
 
-They also use additional data on time use and job postings to analyze factors of these workforce dynamics. They find that cold temperatures increase the risk of unemployment, specifically in industries that are highly exposed to the weather. It doesn't apply to people who aren't exposed to the climate. They also find that cold temperatures increase layoffs but not quits or the end of temporary contracts, and there are more absences and operational disruptions. Cold weather isn't statistically significant to job searching. Overall, the effect of temperature on unemployment is demand-driven where firms reduce hiring during cold weather.
+## The Research Design
 
-I believe that this paper is clearly written and makes a meaningful contribution to climate and economics studies, specifically in how we understand unemployment. The research question and policy relevance is also very timely with the current conditions of the job market. The theoretical framework and identification strategy is credible and their finding of how cold affects unemployment is new.
+The way the authors isolate the effect of temperature, using variation within the same county, year, and state-by-month, works well for the question. They also run a lot of robustness checks which makes their findings stronger.
 
-## Research Design and Identification
+One thing that stood out is how the coefficient on the coldest temperature bin drops to zero when they control for snowfall. They say snowfall is probably a bad control since it depends on temperature, but it makes me wonder if they're really picking up on cold temperatures or snowy/icy conditions, which would have different implications. One way to dig into this would be to split regions that get a lot of snow from regions that just get dry when it's cold. That would help separate the effects.
 
-The way the authors isolate the effect of temperature, using variation within the same county, year, and state-by-month works well for the question. They also run a lot of robustness checks which makes their findings stronger.
+The authors also observe temperature over the past three months as one chunk, but I think they should look at each month separately so we can see where the cold matters most. For example, does the cold affect unemployment right away, or does it take a couple months?
 
-One thing that stood out to me was how the coefficient on the coldest temperature bin drops to zero when they control for snowfall. They say that snowfall is probably a bad control since it depends on temperature, but it makes me wonder if they are really picking up on the effect of simply cold temperatures or snowy/icy conditions, which would have different implications. I think they should look into this more. One possibility could be to split the regions that get a lot of snow and regions that just get super dry when it's cold. That would help separate the effects and then we could clearly see if it's just about the temperature or snowy/icy conditions.
+Also, the county assignment could be improved. They use the Current Population Survey, which tells you where people live, but for almost half the sample it just says "metro area" without specific counties. They assign people to the biggest county in the area, which could mean matching people to the wrong weather data. They discuss dropping those observations without the results changing, but it's still worth addressing since it's almost half the data.
 
-For temperature, the authors observe it over the past three months as one chunk, but I think they should look at each month separately, so we can see where the cold matters the most. For example, we could see if the effect of the cold affects unemployment right away, or if it takes a couple months.
+## The Framing
 
-Also, the way they assigned counties could be improved. They use the Current Population Survey, which tells you where people live, but for almost half of the sample it simply says metro area, not specific counties. They just assign people to the biggest county in the area, but that could mean they are incorrectly matching people to counties and wrong weather data. They do discuss how they dropped them and it didn't change the results, but I still think it's meaningful to talk about since it's almost half of the data.
+The motivation is strong. They clearly discuss why weather shocks disrupting employment matters for preparing for climate change. The theoretical model helps organize the different ways temperature could affect unemployment. I just think 4 pages on it might be excessive since the same information could be described more briefly.
 
-## Explanation and Motivation
+The empirical sections are where the motivation really comes through, walking through each channel step by step. Their argument for why cold matters more than heat is convincing too. Cold weather creates hard cutoffs where work just can't happen, while heat mostly slows things down. That makes intuitive sense and helps explain why their results look the way they do.
 
-The explanation and motivation for the paper is strong. They clearly discuss why this topic matters, that weather shocks can disrupt employment and that understanding this is important for preparing for climate change. The theoretical model is helpful for organizing the different ways temperature could affect unemployment (through firms, workers, or the matching process). I just think 4 pages might be excessive, since we don't gain any new information that can't just be described in words.
+## The Evidence
 
-I was able to better understand their motivation in the empirical sections where they walk through each channel step by step. I also think their argument for why cold matters more than heat is convincing. They explain that cold weather creates hard cutoffs where work just can't happen, while heat mostly just slows things down. That distinction makes intuitive sense and helps explain why their results look the way they do.
+The main CPS analysis is strong with over 15 million observations, a solid identification strategy, and robustness checks that all point in the same direction. The mechanisms section could be improved though, since the ATUS sample for job search is very small at about 5,600 observations and the result doesn't tell us much.
 
-## Presentation
+The overall conclusion that cold weather increases unemployment through the demand side holds up well, but the evidence for specific mechanisms is limited by the data.
 
-They present the results in a convincing way with their data. The main CPS analysis is strong with over 15 million observations, a solid identification strategy, and many robustness checks that all point in the same direction. I think the mechanisms section could be improved since the ATUS sample for job search is very small with only about 5,600 observations, and the result doesn't tell us much.
+## Overall
 
-The overall conclusion that cold weather increases unemployment through the demand side holds up well, but the evidence for the specific mechanisms is limited because of their data.
-
-## Suggestions
-
-I recommend that the authors revise and resubmit just to sharpen the details. There aren't any fundamental problems and the main finding is new and policy-relevant with the research design being credible. The most important revision would be digging deeper into whether the effect is really about cold temperatures or about snow and ice that comes with cold. They could also break the industries that are at high risk into more specific categories, since they could face different cold exposure. It should all be doable with their data and I think it would make the paper stronger.
+There aren't fundamental problems and the main finding is new and policy-relevant with a credible research design. The most important revision would be digging deeper into whether the effect is really about cold temperatures or snow and ice. They could also break the high-risk industries into more specific categories since they could face different cold exposure. It should all be doable with their data.
