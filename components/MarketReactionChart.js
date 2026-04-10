@@ -23,7 +23,7 @@ function getTheme() {
     bg: s.getPropertyValue("--bg").trim(),
     white: s.getPropertyValue("--white").trim(),
     border: s.getPropertyValue("--border").trim(),
-    accent: s.getPropertyValue("--accent").trim(),
+    accent: document.documentElement.getAttribute("data-theme") === "dark" ? "#5BA8C4" : "#2A7D9D",
   };
 }
 

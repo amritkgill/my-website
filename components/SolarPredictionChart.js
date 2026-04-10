@@ -26,7 +26,7 @@ function getTheme() {
     bg: s.getPropertyValue("--bg").trim(),
     white: s.getPropertyValue("--white").trim(),
     border: s.getPropertyValue("--border").trim(),
-    accent: s.getPropertyValue("--accent").trim(),
+    accent: document.documentElement.getAttribute("data-theme") === "dark" ? "#EBB76A" : "#D4942A",
   };
 }
 

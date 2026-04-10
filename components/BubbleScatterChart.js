@@ -135,7 +135,7 @@ function renderChart(svgEl, tooltipEl, dims) {
   const trendLine = g.append("line")
     .attr("x1", x(9)).attr("y1", y(slope * 9 + intercept))
     .attr("x2", x(9)).attr("y2", y(slope * 9 + intercept))
-    .attr("stroke", t.accent).attr("stroke-width", 2)
+    .attr("stroke", t.muted).attr("stroke-width", 2)
     .attr("stroke-dasharray", "8 4").attr("opacity", 0.5);
 
   trendLine.transition().delay(1800).duration(1000).ease(d3.easeQuadOut)

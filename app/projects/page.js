@@ -11,7 +11,7 @@ const inProgress = [
   {
     id: "deforestation",
     title: "Deforestation & Child Health",
-    subtitle: "Research Proposal",
+    subtitle: "Natural Resource Economics",
     description:
       "Does deforestation cause worse health outcomes for children in tropical countries?",
   },

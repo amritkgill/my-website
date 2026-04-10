@@ -13,8 +13,8 @@ tools:
 
 ## Overview
 
-Housing prices don't move in a vacuum. They respond to broader economic conditions like unemployment and inflation, and understanding that relationship matters for anyone thinking about housing policy or affordability.
+Housing prices are tied to the broader economy. When unemployment rises or inflation shifts, housing tends to follow. I wanted to measure how strong that relationship actually is.
 
 I estimated the effect of the unemployment rate and Consumer Price Index on the House Price Index using OLS regression on annual U.S. data from 1975 to 1994 (sourced from FRED via Kaggle). As a learning exercise, I also computed the coefficients manually using the normal equation to verify the library output.
 
-A 1 percentage point increase in unemployment is associated with a 3.76-point decrease in the House Price Index, holding CPI constant. A 1-point increase in CPI is associated with a 1.02-point increase. Both are significant at p < 0.001, and the model explains 99.7% of the variation in house prices (R² = 0.997). The high condition number (1,060) does suggest some multicollinearity between unemployment and CPI, and variables like mortgage rates and disposable income were theoretically relevant but didn't reach significance in this dataset.
+Higher unemployment pulls housing prices down, and higher CPI pushes them up. The model explains 99.7% of the variation in house prices (R² = 0.997), and both effects are statistically significant (p < 0.001). I also looked at mortgage rates and disposable income, but neither was significant in this dataset.

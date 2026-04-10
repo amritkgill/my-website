@@ -3,6 +3,7 @@
 import BubbleScatterChart from "./BubbleScatterChart";
 import MarketReactionChart from "./MarketReactionChart";
 import SolarPredictionChart from "./SolarPredictionChart";
+import HousingScatterChart from "./HousingScatterChart";
 
 const VIZZES = {
   tariffs: {
@@ -14,6 +15,10 @@ const VIZZES = {
   },
   "solar-energy": {
     chart: <SolarPredictionChart maxWidth={760} />,
+  },
+  "housing-prices": {
+    chart: <HousingScatterChart maxWidth={760} />,
+    caption: "Higher unemployment is associated with lower housing prices.",
   },
 };
 

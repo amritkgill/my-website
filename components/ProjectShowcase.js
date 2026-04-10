@@ -5,6 +5,7 @@ import Link from "next/link";
 import BubbleScatterChart from "./BubbleScatterChart";
 import MarketReactionChart from "./MarketReactionChart";
 import SolarPredictionChart from "./SolarPredictionChart";
+import HousingScatterChart from "./HousingScatterChart";
 
 const SLIDES = [
   {
@@ -34,6 +35,15 @@ const SLIDES = [
     linkText: "View project →",
     vizCaption: "The closer to the dashed line, the better the prediction.",
     viz: <SolarPredictionChart maxWidth={960} />,
+  },
+  {
+    projectUrl: "/projects/housing-prices",
+    title: "Macroeconomic Determinants of Housing Prices",
+    description:
+      "How unemployment and inflation predict U.S. housing prices.",
+    linkText: "View project →",
+    vizCaption: "Higher unemployment is associated with lower housing prices.",
+    viz: <HousingScatterChart maxWidth={960} />,
   },
 ];
 
