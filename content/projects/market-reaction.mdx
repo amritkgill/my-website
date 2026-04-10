@@ -19,21 +19,3 @@ Every month, the Federal Reserve, Bureau of Labor Statistics, and Bureau of Econ
 I estimated the effect of FOMC decisions, nonfarm payroll releases, GDP prints, and CPI reports on daily S&P 500 returns using OLS with robust standard errors. To test whether markets react more sharply during uncertain times, I added VIX interaction terms that allow the announcement effect to vary with the level of volatility on the prior trading day.
 
 Fed announcements are associated with a 0.19% increase in daily returns on announcement days (p < 0.01), and that effect gets larger when the VIX is elevated. Employment reports show a smaller but still significant positive effect, while GDP and CPI releases produce more mixed results depending on the sample period and volatility regime.
-
-```python
-import statsmodels.api as sm
-import pandas as pd
-
-# Load market return data with announcement indicators
-df = pd.read_csv("market_announcements.csv", parse_dates=["date"])
-
-# Define regressors
-X = df[["fed_announcement", "nfp_announcement", "gdp_announcement",
-        "cpi_announcement", "vix_lag", "fed_x_vix"]]
-X = sm.add_constant(X)
-y = df["sp500_return"]
-
-# OLS with robust standard errors
-model = sm.OLS(y, X).fit(cov_type="HC1")
-print(model.summary())
-```

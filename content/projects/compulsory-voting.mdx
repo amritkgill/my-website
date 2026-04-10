@@ -27,29 +27,6 @@ Compulsory voting increases turnout by about **10 percentage points** (p = 0.005
 
 Turnout is measured as the percentage of voting-age population that casts a ballot, from the International IDEA Voter Turnout Database. The treatment variable is a binary indicator for whether a universal compulsory voting law was in effect, manually coded from official government records. The merged dataset has 2,441 country-year observations. Since I'm only measuring whether the law exists (not how strictly it's enforced), this is an Intention-to-Treat estimate.
 
-## Methodology
-
-```python
-import statsmodels.formula.api as smf
-
-# Two-way fixed effects with clustered standard errors
-model = smf.ols(
-    "Q('Voter Turnout') ~ Compulsory + C(cty_fe) + C(year_fe)",
-    data=df
-).fit(cov_type="cluster", cov_kwds={"groups": df["cty_fe"]})
-
-print(model.summary())
-```
-
-```python
-# Event-study regression: turnout dynamics around adoption
-model_es = smf.ols(
-    "Q('Voter Turnout') ~ C(rel_year_cat, Treatment(reference=-1)) "
-    "+ C(cty_fe) + C(year_fe)",
-    data=es
-).fit(cov_type="cluster", cov_kwds={"groups": es["cty_fe"]})
-```
-
 ## Robustness
 
 - Adding country-specific linear time trends: effect is 6.75 p.p.
