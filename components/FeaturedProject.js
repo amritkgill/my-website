@@ -18,6 +18,7 @@ export default function FeaturedProject() {
       </p>
       <div className="featured-viz">
         <BubbleScatterChart projectUrl={null} maxWidth={960} />
+        <p className="viz-caption">Industries with higher tariff rates saw bigger declines in effective tax rates.</p>
       </div>
       <Link href="/projects/tariffs" className="featured-link">
         Read the full project →
