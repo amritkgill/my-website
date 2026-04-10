@@ -3,76 +3,41 @@
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import BubbleScatterChart from "./BubbleScatterChart";
-import SolarPredictionChart from "./SolarPredictionChart";
 import MarketReactionChart from "./MarketReactionChart";
-
-function PlaceholderViz({ title, description, tag }) {
-  return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: "340px",
-      gap: "16px",
-      padding: "40px 24px",
-    }}>
-      <span style={{
-        fontSize: "0.65rem",
-        fontWeight: 700,
-        textTransform: "uppercase",
-        letterSpacing: "2px",
-        color: "var(--accent)",
-      }}>{tag}</span>
-      <p style={{
-        fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
-        fontWeight: 700,
-        color: "var(--text)",
-        textAlign: "center",
-        lineHeight: 1.2,
-        maxWidth: "520px",
-      }}>{title}</p>
-      <p style={{
-        fontSize: "0.9rem",
-        color: "var(--text-muted)",
-        textAlign: "center",
-        maxWidth: "400px",
-        lineHeight: 1.6,
-      }}>{description}</p>
-      <div style={{
-        marginTop: "24px",
-        padding: "10px 20px",
-        border: "1px solid var(--border)",
-        borderRadius: "20px",
-        fontSize: "0.75rem",
-        fontWeight: 600,
-        textTransform: "uppercase",
-        letterSpacing: "1.5px",
-        color: "var(--text-muted)",
-      }}>
-        Visualization coming soon
-      </div>
-    </div>
-  );
-}
+import SolarPredictionChart from "./SolarPredictionChart";
 
 const SLIDES = [
   {
+    projectUrl: "/projects/tariffs",
+    label: "Featured Project",
+    title: "Tariffs & Corporate Profit Shifting",
+    description:
+      "For my capstone, I'm investigating whether the 2018 tariffs on Chinese imports caused U.S. companies to shift profits overseas to lower their tax burden. Using data from Bloomberg and SEC filings across 1,674 firms, tariff-exposed industries saw significant declines in effective tax rates.",
+    linkText: "Read the full project →",
+    vizCaption: "Industries with higher tariff rates saw bigger declines in effective tax rates.",
+    viz: <BubbleScatterChart projectUrl={null} maxWidth={960} />,
+  },
+  {
     projectUrl: "/projects/market-reaction",
     title: "Market Reaction to Announcements",
-    subtitle: "After controlling for market conditions, how much does each announcement type move the S\u0026P 500 overnight?",
-    note: "Adjusted for volatility and prior returns.",
+    description:
+      "How much do Fed, jobs, and CPI announcements move the S&P 500?",
+    linkText: "View project →",
+    vizCaption: "After controlling for market conditions, how much does each announcement type move the S&P 500 overnight?",
     viz: <MarketReactionChart maxWidth={960} />,
   },
   {
     projectUrl: "/projects/solar-energy",
     title: "Predicting Solar Energy",
-    subtitle: "The x-axis is the actual energy produced, and the y-axis is what a machine learning model predicted from weather alone. The closer to the dashed line, the better the guess.",
+    description:
+      "Using Random Forest to predict daily solar output from weather data.",
+    linkText: "View project →",
+    vizCaption: "The closer to the dashed line, the better the prediction.",
     viz: <SolarPredictionChart maxWidth={960} />,
   },
 ];
 
-export default function VizCarousel() {
+export default function ProjectShowcase() {
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -87,7 +52,6 @@ export default function VizCarousel() {
   const prev = () => scrollTo(Math.max(0, activeIndex - 1));
   const next = () => scrollTo(Math.min(SLIDES.length - 1, activeIndex + 1));
 
-  // Keep activeIndex in sync when user swipes manually
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -99,9 +63,21 @@ export default function VizCarousel() {
     return () => container.removeEventListener("scroll", onScroll);
   }, []);
 
+  const active = SLIDES[activeIndex];
+
   return (
-    <section id="chart-section" className="chart-section">
-      {/* Arrows + scroll container in a row */}
+    <section className="showcase" id="featured">
+      <div className="showcase-text">
+        {active.label && <span className="featured-label">{active.label}</span>}
+        <Link href={active.projectUrl} className="featured-title-link">
+          <h2 className="featured-title">{active.title}</h2>
+        </Link>
+        <p className="featured-description">{active.description}</p>
+        <Link href={active.projectUrl} className="featured-link">
+          {active.linkText}
+        </Link>
+      </div>
+
       <div className="carousel-row">
         <button
           onClick={prev}
@@ -117,11 +93,7 @@ export default function VizCarousel() {
         <div ref={scrollRef} className="carousel-scroll">
           {SLIDES.map((slide, i) => (
             <Link key={i} href={slide.projectUrl} className="carousel-slide">
-              {slide.title && <h2 className="carousel-slide-title">{slide.title}</h2>}
-              {slide.subtitle && <p className="carousel-slide-subtitle">{slide.subtitle}</p>}
-              {slide.note && (
-                <p className="carousel-slide-subtitle" style={{ marginTop: "-24px", fontSize: "0.75rem", color: "var(--text-muted)", opacity: 0.6 }}>{slide.note}</p>
-              )}
+              {slide.vizCaption && <p className="carousel-slide-subtitle">{slide.vizCaption}</p>}
               {slide.viz}
             </Link>
           ))}
@@ -139,7 +111,6 @@ export default function VizCarousel() {
         </button>
       </div>
 
-      {/* Dot indicators */}
       <div className="carousel-dots">
         {SLIDES.map((_, i) => (
           <button

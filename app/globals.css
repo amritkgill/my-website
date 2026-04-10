@@ -170,6 +170,18 @@ main { margin-left: 0; }
   text-align: center;
 }
 
+/* ===== Project Showcase ===== */
+.showcase {
+  padding: 0 0 80px;
+}
+
+.showcase-text {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 48px 40px;
+  text-align: center;
+}
+
 /* ===== Featured Project ===== */
 .featured-project {
   max-width: 960px;
@@ -180,7 +192,7 @@ main { margin-left: 0; }
 
 .featured-label {
   display: inline-block;
-  font-size: 0.65rem;
+  font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -799,6 +811,7 @@ main { margin-left: 0; }
   .hero-name { font-size: clamp(3rem, 12vw, 5rem); }
   .hero-name-col { justify-content: center; }
 
+  .showcase-text { padding: 0 24px 32px; }
   .featured-project { padding: 0 24px 60px; }
   .projects-section, .page-section { padding: 60px 24px; }
   .projects-sections { padding: 70px 16px 32px; }
@@ -821,6 +834,7 @@ main { margin-left: 0; }
   .hero-bio { font-size: 1.2rem; line-height: 1.7; }
   .hero-layout { gap: 20px; }
   .hero-photo { max-width: 180px; }
+  .showcase-text { padding: 0 20px 24px; }
   .featured-project { padding: 0 20px 48px; }
   .featured-description { font-size: 1.05rem; }
   .chart-section { padding: 32px 0 48px !important; }
