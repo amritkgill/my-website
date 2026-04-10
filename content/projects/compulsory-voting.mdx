@@ -19,9 +19,9 @@ links:
 
 Voter turnout has been declining in democracies around the world, and low participation raises real questions about whether election outcomes actually represent the public. Some countries have tried to fix this by making voting mandatory. But does it work?
 
-I estimated the causal effect of compulsory voting laws on voter turnout using a country-year panel covering 202 countries from 1945 to 2025. The design is difference-in-differences: I compared changes in turnout before and after countries adopted compulsory voting laws, relative to countries that never adopted them. I used two-way fixed effects (country and year) with standard errors clustered at the country level. An event study validates the parallel trends assumption.
+I estimated the causal effect of compulsory voting laws on voter turnout using a country-year panel covering 202 countries from 1945 to 2025. The design is difference-in-differences. I compared changes in turnout before and after countries adopted compulsory voting laws, relative to countries that never adopted them. I used two-way fixed effects (country and year) with standard errors clustered at the country level. An event study validates the parallel trends assumption.
 
-Compulsory voting increases turnout by about **10 percentage points** (p = 0.005). With an average turnout rate of 71%, that's roughly a 14% relative increase. The event study shows turnout is stable in the years before adoption and jumps immediately after, suggesting the effect is both real and lasting. Switcher countries and never-treated countries had nearly identical turnout before adoption (70.3% vs 70.1%), which strengthens the causal interpretation.
+Compulsory voting increases turnout by about **10 percentage points** (p = 0.005). With an average turnout rate of 71%, that's roughly a 14% relative increase. To check that this isn't driven by pre-existing trends, I ran an event study that tracks turnout year by year around adoption. Turnout is stable in the years before the law passes and jumps immediately after, which suggests the law itself is driving the change. Countries that adopted compulsory voting and countries that didn't also had nearly identical turnout beforehand (70.3% vs 70.1%), so the two groups were on similar paths before the policy kicked in.
 
 ## Data
 

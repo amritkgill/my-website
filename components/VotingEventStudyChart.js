@@ -3,30 +3,26 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
+// Event study coefficients from the compulsory voting regression
+// Reference year is -1 (coefficient = 0)
 const DATA = [
-  { year: 1975, hpi: 61.09, unemployment: 8.47, cpi: 65.30 },
-  { year: 1976, hpi: 65.53, unemployment: 7.72, cpi: 69.06 },
-  { year: 1977, hpi: 73.44, unemployment: 7.07, cpi: 73.55 },
-  { year: 1978, hpi: 83.75, unemployment: 6.07, cpi: 79.16 },
-  { year: 1979, hpi: 95.13, unemployment: 5.83, cpi: 88.07 },
-  { year: 1980, hpi: 102.67, unemployment: 7.14, cpi: 100.00 },
-  { year: 1981, hpi: 107.24, unemployment: 7.60, cpi: 110.33 },
-  { year: 1982, hpi: 108.46, unemployment: 9.71, cpi: 117.10 },
-  { year: 1983, hpi: 116.24, unemployment: 9.62, cpi: 120.86 },
-  { year: 1984, hpi: 121.46, unemployment: 7.53, cpi: 126.06 },
-  { year: 1985, hpi: 127.66, unemployment: 7.19, cpi: 130.53 },
-  { year: 1986, hpi: 136.38, unemployment: 6.99, cpi: 133.01 },
-  { year: 1987, hpi: 145.20, unemployment: 6.19, cpi: 137.88 },
-  { year: 1988, hpi: 152.99, unemployment: 5.49, cpi: 143.50 },
-  { year: 1989, hpi: 161.06, unemployment: 5.27, cpi: 150.43 },
-  { year: 1990, hpi: 166.11, unemployment: 5.62, cpi: 158.55 },
-  { year: 1991, hpi: 169.28, unemployment: 6.82, cpi: 165.26 },
-  { year: 1992, hpi: 173.99, unemployment: 7.51, cpi: 170.27 },
-  { year: 1993, hpi: 178.05, unemployment: 6.90, cpi: 175.30 },
-  { year: 1994, hpi: 182.58, unemployment: 6.08, cpi: 179.87 },
+  { rel: -8, coef: 2.59, se: 0.586 },
+  { rel: -6, coef: -10.91, se: 0.486 },
+  { rel: -5, coef: -2.04, se: 0.894 },
+  { rel: -4, coef: 7.68, se: 2.664 },
+  { rel: -3, coef: 0.20, se: 3.326 },
+  { rel: -1, coef: 0, se: 0 },
+  { rel: 0, coef: 2.26, se: 1.328 },
+  { rel: 1, coef: 9.64, se: 2.294 },
+  { rel: 2, coef: -4.22, se: 4.343 },
+  { rel: 3, coef: 2.63, se: 2.151 },
+  { rel: 4, coef: 13.61, se: 1.156 },
+  { rel: 5, coef: -1.12, se: 2.123 },
+  { rel: 6, coef: 7.14, se: 2.126 },
+  { rel: 7, coef: -0.64, se: 4.488 },
 ];
 
-export default function HousingScatterChart({ maxWidth = 760 }) {
+export default function VotingEventStudyChart({ maxWidth = 760 }) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
 
@@ -37,7 +33,7 @@ export default function HousingScatterChart({ maxWidth = 760 }) {
       if (!containerRef.current) return;
       const containerWidth = containerRef.current.offsetWidth;
       const width = Math.min(containerWidth, maxWidth);
-      const height = width * 0.55;
+      const height = width * 0.5;
       const margin = { top: 20, right: 30, bottom: 50, left: 60 };
       const innerW = width - margin.left - margin.right;
       const innerH = height - margin.top - margin.bottom;
@@ -46,10 +42,11 @@ export default function HousingScatterChart({ maxWidth = 760 }) {
       const textColor = isDark ? "#E8E4DF" : "#2C2C2C";
       const mutedColor = isDark ? "#a89d91" : "#5c5148";
       const gridColor = isDark ? "#3a3a3a" : "#e0d6cc";
-      const accentColor = isDark ? "#5BC49E" : "#2A9D6E";
+      const accentColor = isDark ? "#B07CC6" : "#7B2D8E";
+      const ciColor = isDark ? "rgba(176,124,198,0.2)" : "rgba(123,45,142,0.15)";
 
       d3.select(svgRef.current).selectAll("*").remove();
-      d3.select(containerRef.current).selectAll(".housing-tooltip").remove();
+      d3.select(containerRef.current).selectAll(".voting-tooltip").remove();
 
       const svg = d3.select(svgRef.current)
         .attr("width", width)
@@ -60,11 +57,11 @@ export default function HousingScatterChart({ maxWidth = 760 }) {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
       const x = d3.scaleLinear()
-        .domain([4.5, 10.5])
+        .domain([-9, 8])
         .range([0, innerW]);
 
       const y = d3.scaleLinear()
-        .domain([50, 195])
+        .domain([-20, 25])
         .range([innerH, 0]);
 
       // Grid lines
@@ -75,16 +72,38 @@ export default function HousingScatterChart({ maxWidth = 760 }) {
         .attr("y1", d => y(d)).attr("y2", d => y(d))
         .attr("stroke", gridColor).attr("stroke-width", 0.5);
 
+      // Zero line
+      g.append("line")
+        .attr("x1", 0).attr("x2", innerW)
+        .attr("y1", y(0)).attr("y2", y(0))
+        .attr("stroke", mutedColor).attr("stroke-width", 1)
+        .attr("stroke-dasharray", "4,3");
+
+      // Vertical line at adoption (rel_year = 0)
+      g.append("line")
+        .attr("x1", x(-0.5)).attr("x2", x(-0.5))
+        .attr("y1", 0).attr("y2", innerH)
+        .attr("stroke", mutedColor).attr("stroke-width", 1.5)
+        .attr("stroke-dasharray", "6,4")
+        .attr("opacity", 0.5);
+
+      g.append("text")
+        .attr("x", x(-0.5)).attr("y", -6)
+        .attr("text-anchor", "middle")
+        .attr("fill", mutedColor)
+        .style("font-size", "0.65rem").style("font-weight", 700)
+        .text("Law adopted");
+
       // Axes
       g.append("g")
         .attr("transform", `translate(0,${innerH})`)
-        .call(d3.axisBottom(x).ticks(6).tickFormat(d => d + "%"))
+        .call(d3.axisBottom(x).ticks(9).tickFormat(d => d > 0 ? `+${d}` : d))
         .call(g => g.select(".domain").attr("stroke", gridColor))
         .call(g => g.selectAll(".tick text").attr("fill", mutedColor).style("font-size", "0.75rem").style("font-weight", 600))
         .call(g => g.selectAll(".tick line").attr("stroke", gridColor));
 
       g.append("g")
-        .call(d3.axisLeft(y).ticks(5))
+        .call(d3.axisLeft(y).ticks(5).tickFormat(d => d + " pp"))
         .call(g => g.select(".domain").attr("stroke", gridColor))
         .call(g => g.selectAll(".tick text").attr("fill", mutedColor).style("font-size", "0.75rem").style("font-weight", 600))
         .call(g => g.selectAll(".tick line").attr("stroke", gridColor));
@@ -95,39 +114,23 @@ export default function HousingScatterChart({ maxWidth = 760 }) {
         .attr("text-anchor", "middle")
         .attr("fill", mutedColor)
         .style("font-size", "0.8rem").style("font-weight", 700)
-        .text("Unemployment Rate");
+        .text("Years relative to adoption");
 
-      g.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -innerH / 2).attr("y", -45)
-        .attr("text-anchor", "middle")
-        .attr("fill", mutedColor)
-        .style("font-size", "0.8rem").style("font-weight", 700)
-        .text("House Price Index");
-
-      // Regression line (from OLS: HPI = -3.76 * unemployment + 1.02 * CPI + constant)
-      // Simple bivariate for this viz: regress HPI on unemployment only
-      const n = DATA.length;
-      const meanX = d3.mean(DATA, d => d.unemployment);
-      const meanY = d3.mean(DATA, d => d.hpi);
-      const slope = d3.sum(DATA, d => (d.unemployment - meanX) * (d.hpi - meanY)) /
-                    d3.sum(DATA, d => (d.unemployment - meanX) ** 2);
-      const intercept = meanY - slope * meanX;
-
-      const lineX1 = 4.5, lineX2 = 10.5;
-      g.append("line")
-        .attr("x1", x(lineX1)).attr("y1", y(intercept + slope * lineX1))
-        .attr("x2", x(lineX2)).attr("y2", y(intercept + slope * lineX2))
-        .attr("stroke", mutedColor)
+      // Confidence intervals (vertical lines)
+      g.selectAll(".ci")
+        .data(DATA.filter(d => d.se > 0))
+        .join("line")
+        .attr("x1", d => x(d.rel)).attr("x2", d => x(d.rel))
+        .attr("y1", d => y(d.coef - 1.96 * d.se))
+        .attr("y2", d => y(d.coef + 1.96 * d.se))
+        .attr("stroke", accentColor)
         .attr("stroke-width", 2)
-        .attr("stroke-dasharray", "6,4")
-        .attr("opacity", 0.5);
+        .attr("opacity", 0.3);
 
       // Tooltip
-      const tooltip = d3.select(containerRef.current).selectAll(".housing-tooltip").data([0]);
-      const tooltipEl = tooltip.enter()
+      const tooltipEl = d3.select(containerRef.current)
         .append("div")
-        .attr("class", "housing-tooltip")
+        .attr("class", "voting-tooltip")
         .style("position", "absolute")
         .style("pointer-events", "none")
         .style("background", isDark ? "#2a2a2a" : "#fff")
@@ -139,25 +142,25 @@ export default function HousingScatterChart({ maxWidth = 760 }) {
         .style("color", textColor)
         .style("box-shadow", "0 4px 12px rgba(0,0,0,0.1)")
         .style("opacity", 0)
-        .style("z-index", 10)
-        .merge(tooltip);
+        .style("z-index", 10);
 
       // Points
       g.selectAll("circle")
         .data(DATA)
         .join("circle")
-        .attr("cx", d => x(d.unemployment))
-        .attr("cy", d => y(d.hpi))
-        .attr("r", 5)
-        .attr("fill", accentColor)
-        .attr("opacity", 0.8)
+        .attr("cx", d => x(d.rel))
+        .attr("cy", d => y(d.coef))
+        .attr("r", d => d.rel === -1 ? 4 : 5)
+        .attr("fill", d => d.rel === -1 ? mutedColor : accentColor)
+        .attr("opacity", 0.9)
         .attr("stroke", "white")
         .attr("stroke-width", 1)
         .style("cursor", "pointer")
         .on("mouseenter", function(event, d) {
           d3.select(this).transition().duration(150).attr("r", 8).attr("opacity", 1);
+          const label = d.rel === -1 ? "Reference year" : `${d.coef > 0 ? "+" : ""}${d.coef.toFixed(1)} pp`;
           tooltipEl
-            .html(`<strong>${d.year}</strong><br/>HPI: ${d.hpi.toFixed(1)}<br/>Unemployment: ${d.unemployment.toFixed(1)}%`)
+            .html(`<strong>Year ${d.rel > 0 ? "+" : ""}${d.rel}</strong><br/>${label}`)
             .style("opacity", 1);
         })
         .on("mousemove", function(event) {
@@ -166,22 +169,24 @@ export default function HousingScatterChart({ maxWidth = 760 }) {
             .style("left", (event.clientX - bounds.left + 12) + "px")
             .style("top", (event.clientY - bounds.top - 10) + "px");
         })
-        .on("mouseleave", function() {
-          d3.select(this).transition().duration(150).attr("r", 5).attr("opacity", 0.8);
+        .on("mouseleave", function(d) {
+          const datum = d3.select(this).datum();
+          d3.select(this).transition().duration(150).attr("r", datum.rel === -1 ? 4 : 5).attr("opacity", 0.9);
           tooltipEl.style("opacity", 0);
         });
 
-      // Year labels for a few key points
-      const labeled = DATA.filter(d => [1975, 1982, 1988, 1994].includes(d.year));
-      g.selectAll(".year-label")
-        .data(labeled)
-        .join("text")
-        .attr("x", d => x(d.unemployment) + 8)
-        .attr("y", d => y(d.hpi) - 8)
-        .attr("fill", mutedColor)
-        .style("font-size", "0.7rem")
-        .style("font-weight", 600)
-        .text(d => d.year);
+      // Connect points with line
+      const line = d3.line()
+        .x(d => x(d.rel))
+        .y(d => y(d.coef));
+
+      g.append("path")
+        .datum(DATA)
+        .attr("d", line)
+        .attr("fill", "none")
+        .attr("stroke", accentColor)
+        .attr("stroke-width", 1.5)
+        .attr("opacity", 0.4);
     };
 
     drawChart();

@@ -6,6 +6,7 @@ import BubbleScatterChart from "./BubbleScatterChart";
 import MarketReactionChart from "./MarketReactionChart";
 import SolarPredictionChart from "./SolarPredictionChart";
 import HousingScatterChart from "./HousingScatterChart";
+import VotingEventStudyChart from "./VotingEventStudyChart";
 
 const SLIDES = [
   {
@@ -35,6 +36,15 @@ const SLIDES = [
     linkText: "View project →",
     vizCaption: "The closer to the dashed line, the better the prediction.",
     viz: <SolarPredictionChart maxWidth={960} />,
+  },
+  {
+    projectUrl: "/projects/compulsory-voting",
+    title: "Compulsory Voting & Voter Turnout",
+    description:
+      "Does making voting mandatory actually increase turnout?",
+    linkText: "View project →",
+    vizCaption: "Turnout jumps after compulsory voting is adopted, with no clear pre-trend.",
+    viz: <VotingEventStudyChart maxWidth={960} />,
   },
   {
     projectUrl: "/projects/housing-prices",
