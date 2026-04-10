@@ -15,7 +15,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="hero-arrow" style={{ marginTop: "auto", textAlign: "center", paddingBottom: "32px" }}>
-        <a href="#chart-section" style={{ display: "inline-block", animation: "bounce 1.8s ease-in-out infinite" }}>
+        <a href="#featured" style={{ display: "inline-block", animation: "bounce 1.8s ease-in-out infinite" }}>
           <svg width="36" height="20" viewBox="0 0 36 20" fill="none">
             <polyline
               points="2,2 18,18 34,2"

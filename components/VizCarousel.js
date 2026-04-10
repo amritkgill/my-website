@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import BubbleScatterChart from "./BubbleScatterChart";
 import SolarPredictionChart from "./SolarPredictionChart";
 import MarketReactionChart from "./MarketReactionChart";
 
@@ -57,12 +56,6 @@ function PlaceholderViz({ title, description, tag }) {
 }
 
 const SLIDES = [
-  {
-    projectUrl: "/projects/tariffs",
-    title: "Tariffs & Corporate Profit Shifting",
-    subtitle: "Each bubble represents a U.S. industry",
-    viz: <BubbleScatterChart projectUrl={null} maxWidth={960} />,
-  },
   {
     projectUrl: "/projects/market-reaction",
     title: "Market Reaction to Announcements",

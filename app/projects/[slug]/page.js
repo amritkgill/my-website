@@ -1,5 +1,6 @@
 import { getProjectBySlug, getAllProjects } from "@/lib/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import ProjectViz from "@/components/ProjectViz";
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
@@ -26,16 +27,12 @@ export default async function ProjectPage({ params }) {
           &larr; Back to Projects
         </a>
         <h1>{frontmatter.title}</h1>
+        {frontmatter.type && (
+          <p className="project-page-type">{frontmatter.type}</p>
+        )}
         <p className="project-page-meta">
           {frontmatter.date}
         </p>
-        {frontmatter.tools && (
-          <div className="project-page-tools">
-            {frontmatter.tools.map((tool) => (
-              <span key={tool}>{tool}</span>
-            ))}
-          </div>
-        )}
         {frontmatter.links && (
           <div className="project-page-links">
             {frontmatter.links.map((link) => (
@@ -55,6 +52,7 @@ export default async function ProjectPage({ params }) {
       <div className="project-page-content">
         <MDXRemote source={content} />
       </div>
+      <ProjectViz slug={slug} />
     </div>
   );
 }

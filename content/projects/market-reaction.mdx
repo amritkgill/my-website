@@ -2,7 +2,7 @@
 title: "Analyzing Market Reaction to Economic Announcements"
 type: "Econometric Analysis"
 date: "May 2025"
-description: "Estimating the causal impact of major economic announcements on equity market returns using OLS regression with robust standard errors and VIX-based interaction terms."
+description: "How much do Fed, jobs, and CPI announcements move the S&P 500?"
 tools:
   - Python
   - OLS Regression
@@ -14,17 +14,11 @@ tools:
 
 ## Overview
 
-This project measures how equity markets respond to scheduled economic announcements from the Federal Reserve, Bureau of Labor Statistics, and Bureau of Economic Analysis. Using daily return data and a comprehensive calendar of announcement dates, the analysis isolates the incremental effect of each announcement type on aggregate market returns while controlling for prevailing volatility conditions.
+Every month, the Federal Reserve, Bureau of Labor Statistics, and Bureau of Economic Analysis release scheduled announcements that move markets. The question is how much, and whether the reaction depends on how uncertain the market already is.
 
-## Methodology
+I estimated the effect of FOMC decisions, nonfarm payroll releases, GDP prints, and CPI reports on daily S&P 500 returns using OLS with robust standard errors. To test whether markets react more sharply during uncertain times, I added VIX interaction terms that allow the announcement effect to vary with the level of volatility on the prior trading day.
 
-The primary specification is an OLS regression of daily S&P 500 returns on announcement indicator variables, with heteroskedasticity-robust (HC1) standard errors to account for time-varying volatility in financial returns. The baseline model includes indicators for FOMC decisions, nonfarm payroll releases, GDP prints, and CPI reports.
-
-VIX interaction terms extend the model by allowing announcement effects to vary with the level of market uncertainty. This captures the empirical regularity that markets react more sharply to news during high-volatility regimes. The VIX level on the trading day prior to each announcement serves as the conditioning variable.
-
-## Key Findings
-
-Federal Reserve announcements are associated with a statistically significant 0.19% increase in daily returns on announcement days, with a p-value below 0.01. This effect is amplified during periods of elevated VIX readings, consistent with the information-resolution hypothesis. Employment reports show a smaller but still significant positive effect, while GDP and CPI releases produce more mixed results depending on the sample period and volatility regime.
+Fed announcements are associated with a 0.19% increase in daily returns on announcement days (p < 0.01), and that effect gets larger when the VIX is elevated. Employment reports show a smaller but still significant positive effect, while GDP and CPI releases produce more mixed results depending on the sample period and volatility regime.
 
 ```python
 import statsmodels.api as sm

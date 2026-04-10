@@ -2,7 +2,7 @@
 title: "Macroeconomic Determinants of Housing Prices"
 type: "Econometric Analysis"
 date: "Dec 2024"
-description: "Investigating how the unemployment rate and Consumer Price Index affect the House Price Index using OLS regression on U.S. macroeconomic data from FRED."
+description: "How unemployment and inflation predict U.S. housing prices"
 tools:
   - Python
   - OLS Regression
@@ -13,15 +13,11 @@ tools:
 
 ## Overview
 
-This project investigates how macroeconomic conditions drive housing prices in the United States. Specifically, it estimates the effect of the unemployment rate and Consumer Price Index on the House Price Index using Ordinary Least Squares regression on annual data spanning 1975 to 1994, sourced from FRED via Kaggle.
+Housing prices don't move in a vacuum. They respond to broader economic conditions like unemployment and inflation, and understanding that relationship matters for anyone thinking about housing policy or affordability.
 
-## Research Question
+I estimated the effect of the unemployment rate and Consumer Price Index on the House Price Index using OLS regression on annual U.S. data from 1975 to 1994 (sourced from FRED via Kaggle). As a learning exercise, I also computed the coefficients manually using the normal equation to verify the library output.
 
-How do the Unemployment Rate and Consumer Price Index affect the House Price Index?
-
-## Methodology
-
-The model regresses the House Price Index on the unemployment rate and CPI. OLS estimation was performed both manually (computing the beta coefficients via the normal equation) and using statsmodels to verify results and obtain inference statistics.
+A 1 percentage point increase in unemployment is associated with a 3.76-point decrease in the House Price Index, holding CPI constant. A 1-point increase in CPI is associated with a 1.02-point increase. Both are significant at p < 0.001, and the model explains 99.7% of the variation in house prices (R² = 0.997). The high condition number (1,060) does suggest some multicollinearity between unemployment and CPI, and variables like mortgage rates and disposable income were theoretically relevant but didn't reach significance in this dataset.
 
 ```python
 import statsmodels.api as sm
@@ -35,25 +31,11 @@ model = sm.OLS(y, X).fit()
 print(model.summary())
 ```
 
-### Manual OLS
-
-As a learning exercise, the coefficients were also derived by hand using the normal equation to verify the library output:
-
 ```python
 import numpy as np
 
+# Manual OLS via the normal equation
 X_transpose = np.transpose(X)
 XtX_inv = np.linalg.inv(np.dot(X_transpose, X))
 beta = np.dot(XtX_inv, np.dot(X_transpose, y))
 ```
-
-## Key Findings
-
-- **Unemployment Rate** coefficient: -3.76: a 1 percentage point increase in unemployment is associated with a 3.76-point decrease in the House Price Index, holding CPI constant.
-- **Consumer Price Index** coefficient: 1.02: a 1-point increase in CPI is associated with a 1.02-point increase in the HPI, holding unemployment constant.
-- **R-squared: 0.997**: the model explains 99.7% of the variation in house prices.
-- Both coefficients are statistically significant (p < 0.001).
-
-## Limitations
-
-The condition number (1,060) suggests potential multicollinearity between the regressors. Mortgage rate and real disposable income were initially considered but omitted due to lack of statistical significance within this dataset, despite being theoretically relevant to housing markets. A larger dataset or alternative specification could better capture their influence.

@@ -1,13 +1,13 @@
 "use client";
 
 import Hero from "@/components/Hero";
-import VizCarousel from "@/components/VizCarousel";
+import FeaturedProject from "@/components/FeaturedProject";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <VizCarousel />
+      <FeaturedProject />
     </main>
   );
 }

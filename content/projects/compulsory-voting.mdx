@@ -2,7 +2,7 @@
 title: "The Causal Effect of Compulsory Voting Laws on Voter Turnout"
 type: "Causal Inference"
 date: "Dec 2025"
-description: "Estimating the causal effect of compulsory voting on voter turnout using a global panel of 202 countries and a two-way fixed effects difference-in-differences design with event study validation."
+description: "Does making voting mandatory actually increase turnout?"
 tools:
   - Python
   - Diff-in-Diff
@@ -17,23 +17,17 @@ links:
 
 ## Overview
 
-This paper examines whether compulsory voting laws causally increase voter turnout. Using a country-year panel dataset covering 202 countries from 1945 to 2025, a difference-in-differences design compares changes in turnout before and after the adoption of compulsory voting laws relative to countries that never adopted such laws. The results suggest that compulsory voting increases turnout by approximately 10 percentage points.
+Voter turnout has been declining in democracies around the world, and low participation raises real questions about whether election outcomes actually represent the public. Some countries have tried to fix this by making voting mandatory. But does it work?
 
-## Motivation
+I estimated the causal effect of compulsory voting laws on voter turnout using a country-year panel covering 202 countries from 1945 to 2025. The design is difference-in-differences: I compared changes in turnout before and after countries adopted compulsory voting laws, relative to countries that never adopted them. I used two-way fixed effects (country and year) with standard errors clustered at the country level. An event study validates the parallel trends assumption.
 
-Voter turnout is a significant indicator of democratic health. Participation rates remain low in many countries, raising concerns about the legitimacy of democratic systems and balanced political influence. Compulsory voting aims to close the participation gap by requiring all eligible citizens to vote, strengthening democracy through broader participation and representativeness.
+Compulsory voting increases turnout by about **10 percentage points** (p = 0.005). With an average turnout rate of 71%, that's roughly a 14% relative increase. The event study shows turnout is stable in the years before adoption and jumps immediately after, suggesting the effect is both real and lasting. Switcher countries and never-treated countries had nearly identical turnout before adoption (70.3% vs 70.1%), which strengthens the causal interpretation.
 
 ## Data
 
-The dependent variable is voter turnout, measured as the percentage of the voting-age population that casts a ballot. The main explanatory variable is a binary indicator for whether a universal compulsory voting law was in effect in that country-year. Voter turnout data comes from the International IDEA Voter Turnout Database, merged with a manually coded dataset on compulsory voting laws constructed from official government records.
-
-The merged dataset includes 2,441 country-year observations. The indicator reflects legal status only and enforcement is not measured, making this an Intention-to-Treat estimate.
+Turnout is measured as the percentage of voting-age population that casts a ballot, from the International IDEA Voter Turnout Database. The treatment variable is a binary indicator for whether a universal compulsory voting law was in effect, manually coded from official government records. The merged dataset has 2,441 country-year observations. Since I'm only measuring whether the law exists (not how strictly it's enforced), this is an Intention-to-Treat estimate.
 
 ## Methodology
-
-### Two-Way Fixed Effects
-
-The main estimating equation is a TWFE model with country fixed effects (capturing time-invariant national characteristics) and year fixed effects (capturing global shocks). Standard errors are clustered at the country level.
 
 ```python
 import statsmodels.formula.api as smf
@@ -47,10 +41,6 @@ model = smf.ols(
 print(model.summary())
 ```
 
-### Event Study
-
-An event study model tracks changes in voter turnout in the years surrounding adoption to test the parallel trends assumption. The year immediately before adoption serves as the reference point.
-
 ```python
 # Event-study regression: turnout dynamics around adoption
 model_es = smf.ols(
@@ -60,15 +50,7 @@ model_es = smf.ols(
 ).fit(cov_type="cluster", cov_kwds={"groups": es["cty_fe"]})
 ```
 
-## Key Findings
-
-The coefficient on compulsory voting is **10.18 percentage points** and statistically significant (p = 0.005). Given an average turnout rate of 71%, this corresponds to about a 14% relative increase in participation.
-
-The event study shows turnout remains stable in the years leading up to the law, supporting the parallel trends assumption. After adoption, turnout increases sharply and persists, suggesting the effect is both immediate and lasting.
-
-A pre-treatment balance test confirms that switcher countries (70.3% average turnout) and never-treated countries (70.1%) were nearly identical before adoption, strengthening the causal interpretation.
-
-### Robustness
+## Robustness
 
 - Adding country-specific linear time trends: effect is 6.75 p.p.
 - Leave-one-out test (dropping one country at a time): effect ranges from 7.75 to 11.88 p.p.

@@ -2,54 +2,11 @@
 title: "Predicting Solar Energy Production"
 type: "Machine Learning"
 date: "Mar 2025"
-description: "Building predictive models for solar energy output using Random Forest and Decision Tree algorithms with cross-validation and feature engineering on weather and irradiance data."
-tools:
-  - Python
-  - scikit-learn
-  - Random Forest
-  - Decision Tree
-  - Cross-Validation
-  - Feature Engineering
+description: "Predicting solar output with Random Forest and weather data"
 ---
 
-## Overview
+Solar energy is unpredictable. Output depends on weather conditions that change hour to hour, which makes it hard for grid operators to plan around. If you can forecast how much energy solar panels will produce on a given day, you can manage supply more effectively and avoid shortfalls.
 
-This project develops machine learning models to predict daily solar energy production from photovoltaic installations using meteorological and irradiance features. Accurate production forecasts are critical for grid operators managing intermittent renewable supply and for solar asset owners optimizing maintenance schedules and revenue projections.
+I built machine learning models to predict daily solar energy production using weather and irradiance data. I started with a Decision Tree as a baseline and then used a Random Forest as the main model. The raw weather data needed some work before it was useful for prediction, so I engineered new features from it to better capture patterns like seasonality and how different weather variables interact. For tuning, I used 5-fold cross-validation stratified by season and ran a grid search to find the best model configuration.
 
-## Methodology
-
-Two tree-based algorithms form the modeling pipeline: a Decision Tree regressor as a baseline and a Random Forest ensemble as the primary model. Feature engineering transforms raw weather station data into predictive inputs including rolling-average irradiance, temperature-humidity interaction terms, and cyclical encodings for day-of-year and hour-of-day.
-
-Model selection and hyperparameter tuning rely on k-fold cross-validation with five folds stratified by season to prevent data leakage from temporal autocorrelation. Grid search over tree depth, minimum samples per leaf, and number of estimators identifies the best-performing configuration.
-
-## Results
-
-The Random Forest model achieves an R-squared of 0.87 on the held-out test set, substantially outperforming the single Decision Tree baseline (R-squared of 0.72). Feature importance analysis reveals that peak solar irradiance, ambient temperature, and cloud cover fraction are the three most influential predictors, collectively accounting for over 75% of the model's explanatory power.
-
-```python
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import cross_val_score
-import pandas as pd
-
-# Load engineered features
-df = pd.read_csv("solar_features.csv")
-X = df[["irradiance_avg", "temp", "humidity", "cloud_cover",
-        "day_of_year_sin", "day_of_year_cos", "hour"]]
-y = df["energy_kwh"]
-
-# Random Forest with cross-validation
-rf = RandomForestRegressor(
-    n_estimators=200,
-    max_depth=15,
-    min_samples_leaf=5,
-    random_state=42
-)
-
-scores = cross_val_score(rf, X, y, cv=5, scoring="r2")
-print(f"Mean R²: {scores.mean():.2f} (+/- {scores.std():.2f})")
-
-rf.fit(X, y)
-print("Feature importances:")
-for name, imp in zip(X.columns, rf.feature_importances_):
-    print(f"  {name}: {imp:.3f}")
-```
+The Random Forest got an R² of 0.87 on the test set, a solid improvement over the Decision Tree baseline at 0.72. Feature importance showed that peak solar irradiance, ambient temperature, and cloud cover were the three biggest predictors, accounting for over 75% of the model's explanatory power.
