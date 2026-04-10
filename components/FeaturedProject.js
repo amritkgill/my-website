@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import BubbleScatterChart from "./BubbleScatterChart";
 
 export default function FeaturedProject() {
   return (
@@ -16,10 +15,6 @@ export default function FeaturedProject() {
         burden. Using data from Bloomberg and SEC filings across 1,674 firms,
         tariff-exposed industries saw significant declines in effective tax rates.
       </p>
-      <div className="featured-viz">
-        <BubbleScatterChart projectUrl={null} maxWidth={960} />
-        <p className="viz-caption">Industries with higher tariff rates saw bigger declines in effective tax rates.</p>
-      </div>
       <Link href="/projects/tariffs" className="featured-link">
         Read the full project →
       </Link>
