@@ -65,19 +65,23 @@ export default function ProjectShowcase() {
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
+    let timeout;
     const onScroll = () => {
-      const index = Math.round(container.scrollLeft / container.offsetWidth);
-      setActiveIndex(index);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const index = Math.round(container.scrollLeft / container.offsetWidth);
+        setActiveIndex(index);
+      }, 80);
     };
     container.addEventListener("scroll", onScroll, { passive: true });
-    return () => container.removeEventListener("scroll", onScroll);
+    return () => { container.removeEventListener("scroll", onScroll); clearTimeout(timeout); };
   }, []);
 
   const active = SLIDES[activeIndex];
 
   return (
     <section className="showcase" id="featured">
-      <div className="showcase-text">
+      <div className="showcase-text" key={activeIndex} style={{ animation: "fadeIn 0.3s ease" }}>
         {active.label && <span className="featured-label">{active.label}</span>}
         <Link href={active.projectUrl} className="featured-title-link">
           <h2 className="featured-title">{active.title}</h2>
