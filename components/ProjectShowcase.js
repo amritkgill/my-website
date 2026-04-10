@@ -116,10 +116,10 @@ export default function ProjectShowcase() {
 
         <div ref={scrollRef} className="carousel-scroll">
           {SLIDES.map((slide, i) => (
-            <Link key={i} href={slide.projectUrl} className="carousel-slide">
+            <div key={i} className="carousel-slide">
               {slide.vizCaption && <p className="carousel-slide-subtitle">{slide.vizCaption}</p>}
               {slide.viz}
-            </Link>
+            </div>
           ))}
         </div>
 

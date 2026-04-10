@@ -6,10 +6,6 @@ import * as d3 from "d3";
 // Event study coefficients from the compulsory voting regression
 // Reference year is -1 (coefficient = 0)
 const DATA = [
-  { rel: -8, coef: 2.59, se: 0.586 },
-  { rel: -6, coef: -10.91, se: 0.486 },
-  { rel: -5, coef: -2.04, se: 0.894 },
-  { rel: -4, coef: 7.68, se: 2.664 },
   { rel: -3, coef: 0.20, se: 3.326 },
   { rel: -1, coef: 0, se: 0 },
   { rel: 0, coef: 2.26, se: 1.328 },
@@ -17,9 +13,6 @@ const DATA = [
   { rel: 2, coef: -4.22, se: 4.343 },
   { rel: 3, coef: 2.63, se: 2.151 },
   { rel: 4, coef: 13.61, se: 1.156 },
-  { rel: 5, coef: -1.12, se: 2.123 },
-  { rel: 6, coef: 7.14, se: 2.126 },
-  { rel: 7, coef: -0.64, se: 4.488 },
 ];
 
 export default function VotingEventStudyChart({ maxWidth = 760 }) {
@@ -57,7 +50,7 @@ export default function VotingEventStudyChart({ maxWidth = 760 }) {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
       const x = d3.scaleLinear()
-        .domain([-9, 8])
+        .domain([-3.5, 4.5])
         .range([0, innerW]);
 
       const y = d3.scaleLinear()
