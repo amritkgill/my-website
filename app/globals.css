@@ -140,7 +140,7 @@ main { margin-left: 0; }
 
 .hero-layout {
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 5fr 7fr;
   gap: 64px;
   align-items: stretch;
   width: 100%;
@@ -157,8 +157,8 @@ main { margin-left: 0; }
   width: 100%;
   border-radius: 0;
   object-fit: cover;
-  object-position: center 15%;
   aspect-ratio: 3 / 4;
+  object-position: center center;
 }
 
 .hero-bio-col {
