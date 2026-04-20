@@ -6,7 +6,7 @@ export default function Hero() {
       <h1 className="hero-name">Amrit Gill</h1>
       <div className="hero-layout">
         <div className="hero-photo-col">
-          <img src="/amrit.jpeg" alt="Amrit Gill" className="hero-photo" />
+          <img src="/bioimage.png" alt="Amrit Gill" className="hero-photo" />
         </div>
         <div className="hero-bio-col">
           <p className="hero-bio">
